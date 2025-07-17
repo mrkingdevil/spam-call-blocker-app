@@ -20,7 +20,7 @@ import com.google.i18n.phonenumbers.Phonenumber
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -215,21 +215,13 @@ class SpamUtils {
         spamCheckers: List<suspend (String) -> Boolean>,
         number: String
     ): Boolean = coroutineScope {
-        val resultChannel = Channel<Boolean>()
-
         val jobs = spamCheckers.map { checker ->
-            launch {
-                val result = runCatching { checker(number) }.getOrDefault(false)
-                if (result) resultChannel.send(true)
-            }
+            async { runCatching { checker(number) }.getOrDefault(false) }
         }
 
-        val isSpam = resultChannel.receive()
+        val results = jobs.awaitAll()
 
-        // Cancelar todos los jobs restantes
-        jobs.forEach { it.cancel() }
-
-        return@coroutineScope isSpam
+        return@coroutineScope results.any { it }
     }
 
     private fun buildSpamCheckers(context: Context): List<suspend (String) -> Boolean> {
