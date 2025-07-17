@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import com.addev.listaspam.util.ApiConfig
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Locale
@@ -16,14 +17,14 @@ import javax.xml.parsers.DocumentBuilderFactory
  */
 object ApiUtils {
     private const val UNKNOWN_PHONE_API_URL = "https://secure.unknownphone.com/api/"
-    private const val UNKNOWN_PHONE_API_KEY = "d58d5bdaba8a80b2311957e9e4af885c"
+    private val UNKNOWN_PHONE_API_KEY = ApiConfig.UNKNOWN_PHONE_API_KEY
 
     private const val TELLOWS_API_URL = "www.tellows.de"
-    private const val TELLOWS_API_KEY = "koE5hjkOwbHnmcADqZuqqq2"
+    private val TELLOWS_API_KEY = ApiConfig.TELLOWS_API_KEY
 
     private const val TRUECALLER_API_URL_EU = "search5-eu.truecaller.com"
     private const val TRUECALLER_API_URL_NONEU = "search5-noneu.truecaller.com"
-    private const val TRUECALLER_API_KEY = "a1i1V--ua298eldF0hb0rL520GjDz7bzVAdt63J2nzZBnWlEKNCJUeln_7kWj4Ir"
+    private val TRUECALLER_API_KEY = ApiConfig.TRUECALLER_API_KEY
 
     private const val TRUE_CALLER_REPORT_API_URL_EU = "https://filter-store4-eu.truecaller.com/v4/filters?encoding=json"
     private const val TRUE_CALLER_REPORT_API_URL_NONEU = "https://filter-store4-noneu.truecaller.com/v4/filters?encoding=json"

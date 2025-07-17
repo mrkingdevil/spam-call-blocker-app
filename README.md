@@ -69,6 +69,16 @@ This app is designed with user privacy in mind. All data is stored locally on th
 2. Enable installation from unknown sources in your device settings.
 3. Install the app and grant necessary permissions for call management and internet access.
 
+## Configuration
+
+Before building the project, set the following environment variables with your API keys:
+
+- `UNKNOWN_PHONE_API_KEY`
+- `TELLOWS_API_KEY`
+- `TRUECALLER_API_KEY`
+
+These keys are required for spam lookups and reporting features.
+
 ## License
 
 This app is released under the GPLv3 License. See the LICENSE file for more details.
